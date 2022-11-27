@@ -12,5 +12,13 @@ db = SQLAlchemy(app)
 from src.views.auth import auth
 app.register_blueprint(auth)
 
+# import index
+from src.views.index import home
+app.register_blueprint(home)
+
 with app.app_context():
     db.create_all()
+
+@app.route("/")
+def redirect_login():
+    return redirect(url_for("auth.login"))

@@ -5,7 +5,7 @@ class User(db.Model):
     name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True)
-    phone_number = db.Column(db.String(10))
+    phone_number = db.Column(db.String(42))
     password = db.Column(db.String(500))
   
     def __init__(self,
