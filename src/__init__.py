@@ -8,5 +8,9 @@ app = Flask(__name__)
 app.config.from_object(configuration["development"])
 db = SQLAlchemy(app)
 
+## import vies bluprints
+from src.views.auth import auth
+app.register_blueprint(auth)
+
 with app.app_context():
     db.create_all()
