@@ -3,3 +3,4 @@ flask-mysqldb
 Flask-SQLAlchemy
 python-dotenv
 cryptography
+Flask-JWT

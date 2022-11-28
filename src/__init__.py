@@ -21,4 +21,4 @@ with app.app_context():
 
 @app.route("/")
 def redirect_login():
-    return redirect(url_for("auth.login"))
+    return redirect(url_for("auth.register"))
