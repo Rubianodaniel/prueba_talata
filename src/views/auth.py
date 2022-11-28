@@ -1,18 +1,9 @@
-import functools
-from os import error
-
 from flask import (
-    render_template,
     Blueprint,
-    flash,
-    g,
-    redirect,
     request,
-    session,
-    url_for,
     jsonify)
  
-from werkzeug.security import check_password_hash,generate_password_hash
+from werkzeug.security import generate_password_hash
 from src.models.user import User
 from src import db
 
@@ -53,18 +44,31 @@ def register():
                                     "phone_number": "3156324583",
                                     "password" : "pasword"
                                     }})
-        
-        else:
-            return jsonify({"format":{
-                                    "name":"name4",
-                                    "last_name": "lastname2",
-                                    "email": "ejemplo@gmail.com",
-                                    "phone_number": "3156324583",
-                                    "password" : "pasword"
-                                    }})  
+
     except Exception as ex:
         return jsonify({'mensaje':"method no found"})       
 
 
     
+@auth.route("/user", methods= ["GET"])
+def show_all_users():
+    try:
+        user = User.query.all()
+        db.session.commit()
+        list_costumer = []
+        for element in user:
+            costumers = {
+                    'name':element.name,
+                    'last_name': element.last_name,
+                    'email':element.email,
+                    'phone_number':element.phone_number,  
+                    }
+            list_costumer.append(costumers)
+     
+        return jsonify({
+            "costumers": list_costumer
+            })
 
+    except Exception as ex:
+        return jsonify({'mensaje':"method not allowed"})
+      
