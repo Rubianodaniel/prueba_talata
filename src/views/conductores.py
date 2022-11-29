@@ -6,12 +6,13 @@ from flask import (
  
 from werkzeug.security import generate_password_hash
 from src.models.driver import Driver
+from src.models.delivery import Orders
 from src import db
 
 
 conductor = Blueprint('driver',__name__, url_prefix="/driver")
 
-## register user
+## register driver
 @conductor.route("/register", methods= ["GET","POST"])
 def register_driver():
     try:
@@ -50,6 +51,56 @@ def register_driver():
         return jsonify({'mensaje':"method no allowed"})   
 
 
+    
+@conductor.route("/", methods= ["GET"])
+def show_all_drivers():
+    try:
+        driver = Driver.query.all()
+        db.session.commit()
+        list_costumer = []
+        for element in driver:
+            costumers = {
+                    'name':element.name,
+                    'last_name': element.last_name,
+                    'email':element.email,
+                    'phone_number':element.phone_number,  
+                    }
+            list_costumer.append(costumers)
+     
+        return jsonify({
+            "driver": list_costumer
+            })
+
+    except Exception as ex:
+        return jsonify({'mensaje':"method not allowed"})
+
+
+@conductor.route("/orders/<string:email>")
+def show_order_by_driver(email):
+    try:
+        driver_ = Driver.query.filter(Driver.email == email).first()
+        order_= driver_.orders
+        
+        db.session.commit()
+        list_order = []
+        for element in order_:
+            orders = {
+                    'User_email':element.email,
+                    'title':element.title,
+                    'description':element.description,
+                    "order_date" : element.created,
+                    "address" : element.addres    
+            }
+            list_order.append(orders)
+        print(driver_.orders)
+        return jsonify({
+            "oreds": list_order
+        })
+    except Exception as ex:
+        return jsonify({'mensaje':"User not found"})
+      
+
+
 
 
         
@@ -69,28 +120,6 @@ def register_driver():
 
 
 
-# @conductor.route("/orders/<int:id>")
-# def show_order_by_driver(id):
-#     try:
-#         driver_id = AssignedOrder.query.filter(AssignedOrder.conductor_id == id).first()
-#         db.session.commit()
-
-#         if driver_id != None:
-#             order = AssignedOrder.query.filter_by(conductor_id = driver_id).all()
-#             db.session.commit()
-#             list_order=[]
-#             for element in order:
-#                 orders = {'title':element.title,
-#                         'description':element.description,
-#                         "order_date" : element.created,
-#                         "address" : element.addres    
-#                 }
-#                 list_order.append(orders)
-#             return jsonify({
-#                             "orders": "list_order"
-#                             })      
-#     except Exception as ex:
-#         return jsonify({'mensaje':"id does not exist"})
 
 
 

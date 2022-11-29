@@ -13,7 +13,7 @@ auth = Blueprint('auth',__name__, url_prefix="/auth")
 ## register user
 @auth.route("/register", methods= ["GET","POST"])
 def register():
-    try:
+    
         if request.method == "POST":
             name = request.json['name']
             last_name = request.json["last_name"]
@@ -45,8 +45,8 @@ def register():
                                     "password" : "pasword"
                                     }})
 
-    except Exception as ex:
-        return jsonify({'mensaje':"method no found"})       
+    # except Exception as ex:
+    #     return jsonify({'mensaje':"method no found"})       
 
 
     
