@@ -78,24 +78,28 @@ def show_all_drivers():
 @conductor.route("/orders/<string:email>")
 def show_order_by_driver(email):
     try:
-        driver_ = Driver.query.filter(Driver.email == email).first()
-        order_= driver_.orders
-        
-        db.session.commit()
-        list_order = []
-        for element in order_:
-            orders = {
-                    'User_email':element.email,
-                    'title':element.title,
-                    'description':element.description,
-                    "order_date" : element.created,
-                    "address" : element.addres    
-            }
-            list_order.append(orders)
-        print(driver_.orders)
-        return jsonify({
-            "oreds": list_order
-        })
+        if email != "":
+            driver_ = Driver.query.filter(Driver.email == email).first()
+            order_= driver_.orders
+            
+            db.session.commit()
+            list_order = []
+            for element in order_:
+                orders = {
+                        'email': element.email,
+                        'email_driver':element.email_driver,
+                        'title':element.title,
+                        'description':element.description,
+                        "created" : element.created,
+                        "address_order" : element.addres_order,
+                        "delivery_date" : element.delivery_date,
+                        "delivery_time_slot" : element.delivery_time_slot  
+                        }
+                list_order.append(orders)
+            print(driver_.orders)
+            return jsonify({
+                "oreds": list_order
+            })
     except Exception as ex:
         return jsonify({'mensaje':"User not found"})
       
