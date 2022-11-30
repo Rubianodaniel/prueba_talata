@@ -2,10 +2,11 @@ import os
 from dotenv import dotenv_values, load_dotenv
 from os.path import join, dirname
 
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path=dotenv_path)
+uri = os.environ.get("URI")
+
 class Config:
-       
-    dotenv_path = join(dirname(__file__), '.env')
-    load_dotenv(dotenv_path=dotenv_path)
     SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
@@ -23,7 +24,7 @@ class TestingConfig():
 
    
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:123456789@localhost/api_prueba"
+    SQLALCHEMY_DATABASE_URI=uri
     SQLALCHEMY_TRACK_MODIFICATIONS=False
     
 
