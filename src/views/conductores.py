@@ -1,4 +1,6 @@
 import random
+import datetime as dt
+from datetime import datetime
 from flask import (
     Blueprint,
     request,
@@ -102,6 +104,46 @@ def show_order_by_driver(email):
             })
     except Exception as ex:
         return jsonify({'mensaje':"User not found"})
+
+
+@conductor.route("/orders/<string:email>/<string:date>")
+def show_order_driver_date(email, date):
+    # try:
+        if email != "" and date != "":
+            driver_ = Driver.query.filter(Driver.email == email).first()
+            order_= driver_.orders
+            
+            try:
+                date_ = dt.datetime.strptime(date, "%Y-%m-%d").date()
+            except Exception as ex:
+                return jsonify({'mensaje':"the date format does not match what the parameter is receiving"}) 
+                 
+            db.session.commit()
+            list_order = []
+            for element in order_:
+                print(element.delivery_date, date_)
+                if date_ == element.delivery_date:
+                    orders = {
+                            'email': element.email,
+                            'email_driver':element.email_driver,
+                            'title':element.title,
+                            'description':element.description,
+                            "created" : element.created,
+                            "address_order" : element.addres_order,
+                            "delivery_date" : element.delivery_date,
+                            "delivery_time_slot" : element.delivery_time_slot  
+                            }
+                    list_order.append(orders)
+            if len(list_order) != 0:
+                return jsonify({
+                    "oreds": list_order
+                })
+            else:
+                return jsonify({
+                    "message": "Driver not found or Date not found"
+                })
+    # except Exception as ex:
+    #     return jsonify({'mensaje':"User not found"})
       
 
 

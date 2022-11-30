@@ -29,7 +29,7 @@ def create_order():
             delivery_time_slot = request.json["delivery_time_slot"]
   
             try:
-                ### comprobando que la franja horaria corresponda con minimo 1 hora hasta maximo 8 horas
+                ## comprobando que la franja horaria corresponda con minimo 1 hora hasta maximo 8 horas
                 _init_time = dt.datetime.strptime(delivery_time_slot["init_time"], '%H:%M')
                 _end_time = dt.datetime.strptime(delivery_time_slot["end_time"], '%H:%M')
                 if _end_time > (_init_time + dt.timedelta(hours=8)):
@@ -41,7 +41,7 @@ def create_order():
             except Exception as ex:
                 return jsonify({'mensaje':"the time format does not match what the parameter is receiving"})  
 
-
+        
             driver_= Driver.query.all()
             list_driver_email=[]
             for element in driver_:
