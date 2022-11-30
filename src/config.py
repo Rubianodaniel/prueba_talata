@@ -2,38 +2,33 @@ import os
 from dotenv import dotenv_values, load_dotenv
 from os.path import join, dirname
 
-
-
-
-class DevConfig():
-    
-    
+class Config:
+       
     dotenv_path = join(dirname(__file__), '.env')
     load_dotenv(dotenv_path=dotenv_path)
-    
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456789@localhost/api_prueba"
-    SQLALCHEMY_TRACK_MODIFICATION = False
     SECRET_KEY = os.environ.get("SECRET_KEY")
-    # MYSQL_HOST = env["MYSQL_HOST"]
-    # MYSQL_USER = env["MYSQL_USER"]
-    # MYSQL_PASSWORD = env["MYSQL_PASSWORD"]
-    # MYSQL_DB = env["MYSQL_DB"]
-    
-class TestingConfig():
-        
-    dotenv_path = join(dirname(__file__), '.env')
-    load_dotenv(dotenv_path=dotenv_path)
-    
+
+
+class DevConfig(Config):
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456789@localhost/api_prueba2"
+    SQLALCHEMY_TRACK_MODIFICATION = False
+    SQLALCHEMY_ECHO = True
+
+class TestingConfig():
+    
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456789@localhost/api_prueba"
     SQLALCHEMY_TRACK_MODIFICATION = False
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-   
 
+   
+class ProdConfig(Config):
+    SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:123456789@localhost/api_prueba"
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    
 
 configuration = {
     'development' : DevConfig,
-    'testing' : TestingConfig
+    'testing' : TestingConfig,
+    'production' : ProdConfig
 }

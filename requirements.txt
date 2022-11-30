@@ -6,3 +6,4 @@ cryptography
 Flask-JWT
 flask_migrate
 Flask-pymysql
+pytest
