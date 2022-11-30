@@ -50,7 +50,7 @@ def register():
                                     }}),HTTPStatus.OK
 
     except Exception as ex:
-        return jsonify({'mensaje':"format of the object or any of its keys or values are outside the allowed format"},HTTPStatus.CONFLICT)   
+        return jsonify({'mensaje':"format of the object or any of its keys or values are outside the allowed format"})   
 
 
     

@@ -7,7 +7,6 @@ from flask import (
     Blueprint,
     request,
     jsonify,
-
 )
 
 ## importar modelos y base de datos
@@ -43,13 +42,14 @@ def create_order():
                 return jsonify({'mensaje':"the time format does not match what the parameter is receiving"}),HTTPStatus.CONFLICT  
             
             try:
-                # comprobando que la fecha de entrega no sea menor a la fecha de creacion
-                delivery_date_ = dt.datetime.strptime(delivery_date, "%Y-%m-%d")
-                if delivery_date_ < (dt.datetime.today()):
-                    return jsonify({"message": "delivery date cannot be less than order date"}),HTTPStatus.CONFLICT 
+                # comprobando que el formato de fecha de entrega este bien escrito
+                delivery_date_ = dt.datetime.strptime(delivery_date, "%Y-%m-%d").date()             
             except Exception as ex:
-                return jsonify({'mensaje':"the time format does not match what the parameter is receiving"}),HTTPStatus.CONFLICT   
+                return jsonify({'mensaje':"the date delivery format does not match what the parameter is receiving"}),HTTPStatus.CONFLICT   
 
+            if delivery_date_ < (dt.datetime.today().date()):
+                return jsonify({"message": "delivery date cannot be less than order date"}),HTTPStatus.CONFLICT 
+            
             ### CONSULTA
             driver_= Driver.query.all()
             list_driver_email=[]
@@ -96,7 +96,7 @@ def create_order():
                                                     }
                                     }}),HTTPStatus.OK
     except Exception as ex:
-        return jsonify({'mensaje':"Please check the formatting of the delivery date or the hours "}),HTTPStatus.CONFLICT            
+        return jsonify({'mensaje':"Please check the formatting of the delivery date or the hours "})           
 
 
 

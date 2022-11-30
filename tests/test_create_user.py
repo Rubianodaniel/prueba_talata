@@ -32,6 +32,30 @@ class UserTestCase(unittest.TestCase):
         response=self.client.get('/auth/register')
         assert response.status_code == 200
 
+    def test_user_registration_email_none(self):
+        data={
+            "name":"joe",
+            "last_name": "lastname",
+            "email": "",
+            "phone_number": "3156324583",
+            "password" : "admin"
+            }
+        response=self.client.post('/auth/register',json=data)
+        assert response.status_code == 409
+
+    def test_user_registration_keys_invalidate(self):
+        data={
+            "name":"joe",
+            "last_name": "lastname",
+            "emeil": "aaa@aaa.com",
+            "phone_number": "3156324583",
+            "password" : "admin"
+            }
+        
+        response=self.client.post('/auth/register',json=data)
+        assert response.status_code == 200
+
+
     def test_driver_registration(self):
         data={
             "name":"joe",
@@ -40,28 +64,27 @@ class UserTestCase(unittest.TestCase):
             "phone_number": "3156324583",
             "password" : "admin"
             },
-
-
         response = self.client.post('/driver/register',json=data)
         print(response.status_code)
         assert response.status_code == 200
         response = self.client.get('/driver/register')
         assert response.status_code == 200
+
+
+    def test_driver_registration_email_none(self):
+        data={
+            "name":"joe",
+            "last_name": "lastname",
+            "email": "",
+            "phone_number": "3156324583",
+            "password" : "admin"
+            }
+        response=self.client.post('/driver/register',json=data)
+        assert response.status_code == 409
      
-    # def test_order_created(self):
-    #     data={
-    #         "email": "joe@gmail.com",
-    #         "title": "pizza",
-    #         "description": "pizza peperoni",
-    #         "addres_order" : "add",
-    #         "delivery_date": "2022-11-30",
-    #         "delivery_time_slot" : {
-    #                                 "init_time":"8:00",
-    #                                 "end_time" : "9:59"
-    #                                 }
-    #         }
 
-    #     response=self.client.post('/user/order',json=data)
 
-    #     assert response.status_code == 200
+
+
+
     
