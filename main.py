@@ -1,4 +1,3 @@
-
 from src import create_app
 from src.config import configuration
 
