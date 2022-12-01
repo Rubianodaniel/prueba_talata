@@ -22,7 +22,10 @@ def create_app(config = configuration['development']):
     app.register_blueprint(home)
     from src.views.conductores import conductor
     app.register_blueprint(conductor)
-
+    
+    @app.route('/')
+    def index():
+        return "<h1> PRUEBA TALATA </h1>"
     return app
 
 
