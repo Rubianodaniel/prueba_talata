@@ -11,7 +11,7 @@ RUN pip3 install Flask gunicorn
 
 EXPOSE 5000
 
-CMD exec gunicorn --bind :5000 --workers 3 --threads 0 main:app
+CMD exec gunicorn --bind :$PORT --workers 3 --threads 0 main:app
 
 
 
