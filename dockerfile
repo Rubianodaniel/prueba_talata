@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 RUN pip install gunicorn
 
 
-CMD python3 main.py
+CMD exec gunicorn --bind --workers 2 --threads 8 --timeout 0 main:app
