@@ -2,16 +2,16 @@ import os
 from dotenv import dotenv_values, load_dotenv
 from os.path import join, dirname
 
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path=dotenv_path)
-uri = os.environ.get("URI")
+# dotenv_path = join(dirname(__file__), '.env')
+# load_dotenv(dotenv_path=dotenv_path)
+# uri = os.environ.get("URI")
 
 
 basedir = os.path.dirname(__file__)
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-
+    #SECRET_KEY = os.environ.get("SECRET_KEY")
+    SECRET_KEY = "hades2021+"
 
 class DevConfig(Config):
     DEBUG = True

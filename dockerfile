@@ -2,8 +2,11 @@ FROM python:3
 
 RUN mkdir -p /home/app
 COPY . /home/app
-RUN pip install -r requirements.txt
-RUN pip install gunicorn
+WORKDIR /home/app
+
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
 
 EXPOSE 3000
 
