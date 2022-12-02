@@ -9,7 +9,7 @@ from src.models.user import User
 from src import db
 
 
-auth = Blueprint('auth',__name__, url_prefix="/auth")
+auth = Blueprint('auth',__name__, url_prefix="/user")
 
 ## register user
 @auth.route("/register", methods= ["GET","POST"])
@@ -54,7 +54,7 @@ def register():
 
 
     
-@auth.route("/user", methods= ["GET"])
+@auth.route("/", methods= ["GET"])
 def show_all_users():
     
     user = User.query.all()

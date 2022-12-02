@@ -6,6 +6,9 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path=dotenv_path)
 uri = os.environ.get("URI")
 
+
+basedir = os.path.dirname(__file__)
+
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY")
 
@@ -24,7 +27,7 @@ class TestingConfig():
 
    
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI=uri
+    SQLALCHEMY_DATABASE_URI=f'sqlite:///{basedir}/db/prueba1.db'
     SQLALCHEMY_TRACK_MODIFICATIONS=False
     
 
@@ -33,3 +36,4 @@ configuration = {
     'testing' : TestingConfig,
     'production' : ProdConfig
 }
+

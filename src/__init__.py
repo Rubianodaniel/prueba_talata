@@ -15,7 +15,7 @@ def create_app(config = configuration['development']):
     db.init_app(app)
     migrate.init_app(app,db)
     ## import vies bluprints
-    from src.views.auth import auth
+    from src.views.user import auth
     app.register_blueprint(auth)
     # import index
     from src.views.orders import home

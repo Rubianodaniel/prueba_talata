@@ -1,6 +1,7 @@
 FROM python:3
 
 ENV PYTHONUNBUFFERED True
+EXPOSE 5000
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME
@@ -10,4 +11,4 @@ RUN pip install -r requirements.txt
 RUN pip install gunicorn
 
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
+CMD python3 main.py

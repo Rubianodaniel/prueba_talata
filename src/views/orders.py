@@ -17,7 +17,7 @@ from src import db
 
 home = Blueprint('home',__name__, url_prefix="/user")
 
-@home.route("/order", methods=["GET", "POST"])
+@home.route("/createorder", methods=["GET", "POST"])
 def create_order():
     try:
         if request.method == "POST":
@@ -65,7 +65,7 @@ def create_order():
                             title = title,
                             description = description,
                             addres_order = addres_order,
-                            delivery_date = delivery_date,
+                            delivery_date = delivery_date_,
                             delivery_time_slot = delivery_time_slot
                             )
                 
