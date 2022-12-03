@@ -9,9 +9,9 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN pip3 install Flask gunicorn
 
-EXPOSE 5000
+#EXPOSE 5000
 
-CMD exec gunicorn --bind :$PORT --workers 3 --threads 0 main:app
+CMD exec gunicorn --bind :$PORT--workers 3 --threads 0 main:app
 
 
 
