@@ -1,4 +1,4 @@
-[LOGO](https://user-images.githubusercontent.com/101409796/205409214-e37f5ea5-23eb-4b00-ba3f-b0f7f22bc48f.JPG)
+
 # Prueba Talataa 🖥️
 
 
@@ -33,8 +33,8 @@
  3. Abrir el archivo Dockerfile 📂
       - Tiene un contenedor de Python 3️⃣
       - Instala las dependencias requeridas
-      - Ejecuta el servicor en Gunicorn
- 5. Ejecutar dokerfile
+      - Ejecuta el servicor en Gunicorn 🦄
+ 5. Ejecutar dokerfile 🏃‍♀️
 
 ## Ejecucion🖊️
  1. Utilizar el interprete de Python 3️⃣
