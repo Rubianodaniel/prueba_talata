@@ -7,7 +7,7 @@
 - Proyecto creado como requisito tecnico para avanzar en la aplicacion al cargo de Ingeniero de Desarrollo en Python :bowtie:
 - Lenguaje utilizado: Python 💯
 - API almacenada en Google Cloud ☁️
-    🔗 
+    🔗 https://danielserver-ougocrmvpq-uc.a.run.app/
 
 ## Tecnologias 💾
 - Docker
